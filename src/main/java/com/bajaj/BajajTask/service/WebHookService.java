@@ -40,7 +40,7 @@ public class WebHookService {
             System.out.println(webhookUrl);
             System.out.println(accessToken);
 
-            // 2. Your SQL Query (for Question 1)
+            // 2. SQL Query
             String finalQuery =
                     "SELECT p.AMOUNT AS SALARY, CONCAT(e.FIRST_NAME, ' ', e.LAST_NAME) AS NAME, "
                             + "TIMESTAMPDIFF(YEAR, e.DOB, CURDATE()) AS AGE, d.DEPARTMENT_NAME "
@@ -54,15 +54,15 @@ public class WebHookService {
 // Prepare request body DTO
             SolutionRequest answerBody = new SolutionRequest(finalQuery);
 
-// Set headers
+
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.setBearerAuth(accessToken);
+            headers.set("Authorization", accessToken);
 
-// Create HTTP entity
+
             HttpEntity<SolutionRequest> entity = new HttpEntity<>(answerBody, headers);
 
-// Send POST request
+
             restTemplate.postForEntity(webhookUrl, entity, String.class);
 
 

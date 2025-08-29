@@ -31,7 +31,7 @@ public class WebHookService {
             ResponseEntity<WebhookResponse> response = restTemplate.postForEntity(url, body, WebhookResponse.class);
 
             if (response.getBody() == null) {
-                return "❌ Failed: No response from server";
+                return " Failed: No response from server";
             }
 
             String webhookUrl = response.getBody().getWebhook();
@@ -66,10 +66,10 @@ public class WebHookService {
             restTemplate.postForEntity(webhookUrl, entity, String.class);
 
 
-            return "✅ Final SQL query submitted successfully!";
+            return " Final SQL query submitted successfully!";
         } catch (Exception e) {
             e.printStackTrace();
-            return "❌ Error occurred: " + e.getMessage();
+            return " Error occurred: " + e.getMessage();
         }
     }
 
